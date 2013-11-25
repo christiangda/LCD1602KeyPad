@@ -68,7 +68,7 @@ void loop()
     case SELECT:
     {
       lcd.setCursor( 4, 1 );
-      lcd.print( "SELECT" );    
+      lcd.print( "SELECT" );
       break;
     }
     default:
@@ -86,4 +86,3 @@ void loop()
   }
   lcd.print( timestamp, DEC );
 }
-
