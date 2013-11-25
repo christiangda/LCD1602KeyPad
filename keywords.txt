@@ -1,0 +1,60 @@
+##################################################
+# Syntax Coloring Map For LCD1602KeyPad Library 
+##################################################
+# Class (KEYWORD3)                               
+##################################################
+
+LCD1602KeyPad	KEYWORD3
+
+##################################################
+# Datatypes (KEYWORD1)                           
+##################################################
+
+##################################################
+# Methods and Functions (KEYWORD2)               
+##################################################
+
+begin	KEYWORD2
+setBackLight	KEYWORD2
+setBackLightFlash	KEYWORD2
+getButtonsState	KEYWORD2
+readButtons	KEYWORD2
+
+##################################################
+# Objects (KEYWORD3)                             
+##################################################
+
+lcd	KEYWORD3
+
+##################################################
+# Constants (LITERAL1)                           
+##################################################
+
+LCD_COL	LITERAL1
+LCD_ROW	LITERAL1
+CHAR_SIZE	LITERAL1
+BTN_RIGHT_ADC	LITERAL1
+BTN_UP_ADC	LITERAL1
+BTN_DOWN_ADC	LITERAL1
+BTN_LEFT_ADC	LITERAL1
+BTN_SELECT_ADC	LITERAL1
+BTN_NONE_ADC	LITERAL1
+BTN_ADC_GAP	LITERAL1
+NONE	LITERAL1
+RIGHT	LITERAL1
+UP	LITERAL1
+DOWN	LITERAL1
+LEFT	LITERAL1
+SELECT	LITERAL1
+ON	LITERAL1
+OFF	LITERAL1
+PRESSED	LITERAL1
+RELEASED	LITERAL1
+PIN_BUTTON_ADC	LITERAL1
+PIN_LCD_b4	LITERAL1
+PIN_LCD_b5	LITERAL1
+PIN_LCD_b6	LITERAL1
+PIN_LCD_b7	LITERAL1
+PIN_LCD_RS	LITERAL1
+PIN_LCD_E	LITERAL1
+PIN_LCD_K	LITERAL1
