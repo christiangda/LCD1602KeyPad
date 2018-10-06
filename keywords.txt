@@ -1,33 +1,33 @@
 ##################################################
-# Syntax Coloring Map For LCD1602KeyPad Library 
+# Syntax Coloring Map For LCD1602KeyPad Library
 ##################################################
-# Class (KEYWORD3)                               
-##################################################
-
-LCD1602KeyPad	KEYWORD3
-
-##################################################
-# Datatypes (KEYWORD1)                           
+# Class (KEYWORD1)
 ##################################################
 
-##################################################
-# Methods and Functions (KEYWORD2)               
-##################################################
-
-begin	KEYWORD2
-setBackLight	KEYWORD2
-setBackLightFlash	KEYWORD2
-getButtonsState	KEYWORD2
-readButtons	KEYWORD2
+LCD1602KeyPad	KEYWORD1
 
 ##################################################
-# Objects (KEYWORD3)                             
+# Datatypes (KEYWORD2)
+##################################################
+
+##################################################
+# Methods and Functions (KEYWORD3)
+##################################################
+
+begin	KEYWORD3
+setBackLight	KEYWORD3
+setBackLightFlash	KEYWORD3
+getButtonsState	KEYWORD3
+readButtons	KEYWORD3
+
+##################################################
+# Objects (KEYWORD3)
 ##################################################
 
 lcd	KEYWORD3
 
 ##################################################
-# Constants (LITERAL1)                           
+# Constants (LITERAL1)
 ##################################################
 
 LCD_COL	LITERAL1

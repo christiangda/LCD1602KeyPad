@@ -1,4 +1,4 @@
-/* 
+/*
  LCD1602KeyPad.h - Arduino library to control LCD 16x2 with KeyPad Shield
  Copyright 2013 Christian González <christiangda@gmail.com>
 */
@@ -7,7 +7,14 @@
 #define LCD1602KeyPad_h
 
 //External Library
-#include <Arduino.h>
+#if ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+  #include "pins_arduino.h"
+  #include "WConstants.h"
+#endif
+
 #include "LiquidCrystal.h"
 
 /*--------------------------------------------------------------------------------------
@@ -15,7 +22,7 @@
 --------------------------------------------------------------------------------------*/
 /*
  Pins used by LCD & Keypad Shield:
- 
+
     A0:  Buttons, analog input from voltage ladder
     D4:  LCD bit 4
     D5:  LCD bit 5
@@ -24,9 +31,9 @@
     D8:  LCD RS
     D9:  LCD E
     D10: LCD K Backlight (high = on, also has pullup high so default is on)
- 
+
   ADC voltages for the 5 buttons on analog input pin A0:
- 
+
     RIGHT:  0.00V :   0 @ 8bit ;   0 @ 10 bit
     UP:     0.71V :  36 @ 8bit ; 145 @ 10 bit
     DOWN:   1.61V :  82 @ 8bit ; 329 @ 10 bit
@@ -58,20 +65,8 @@
 #define BTN_NONE_ADC    1023
 #define BTN_ADC_GAP     20
 
-//return values
-#define NONE    0
-#define RIGHT   1
-#define UP      2
-#define DOWN    3
-#define LEFT    4
-#define SELECT  5
-
-// Controlling BackLihgt
-#define OFF  false
-#define ON   true
-
-#define PRESSED   true
-#define RELEASED  false
+enum class ButtonKey { NONE, RIGHT, LEFT, UP, DOWN, SELECT };
+enum class ButtonState { IDLE, PRESSED, HOLD, RELEASED };
 
 //
 class LCD1602KeyPad: public LiquidCrystal
@@ -80,15 +75,15 @@ class LCD1602KeyPad: public LiquidCrystal
 		LCD1602KeyPad();		// Constructor
 		~LCD1602KeyPad();		// Destructor
 		void begin();
-		void setBackLight(boolean);
-		void setBackLightFlash(unsigned int);
-		void setButtonsState(boolean);
-		boolean getButtonsState();
-		uint8_t readButtons();
-	
+		void setBackLight(bool);
+		void setBackLightFlash(unsigned long);
+		void setButtonsState(ButtonState);
+		ButtonState getButtonsState();
+		ButtonKey readButtons();
+
 	private:
-		boolean _btn_state;
-		uint8_t _btn_last;
+		ButtonState _btn_state;
+		ButtonKey _btn_last;
 };
 
 #endif
