@@ -11,6 +11,51 @@
 #include "LCD1602KeyPad.h"
 
 /*
+ Pins used by LCD & Keypad Shield:
+
+    A0:  Buttons, analog input from voltage ladder
+    D4:  LCD bit 4
+    D5:  LCD bit 5
+    D6:  LCD bit 6
+    D7:  LCD bit 7
+    D8:  LCD RS
+    D9:  LCD E
+    D10: LCD K Backlight (high = on, also has pullup high so default is on)
+
+  ADC voltages for the 5 buttons on analog input pin A0:
+
+    RIGHT:  0.00V :   0 @ 8bit ;   0 @ 10 bit
+    UP:     0.71V :  36 @ 8bit ; 145 @ 10 bit
+    DOWN:   1.61V :  82 @ 8bit ; 329 @ 10 bit
+    LEFT:   2.47V : 126 @ 8bit ; 507 @ 10 bit
+    SELECT: 3.62V : 185 @ 8bit ; 741 @ 10 bit
+*/
+
+// Pins in use
+const uint8_t PIN_BUTTON_ADC = A0; // A0 is the button ADC input
+const uint8_t PIN_LCD_b4 = 4;
+const uint8_t PIN_LCD_b5 = 5;
+const uint8_t PIN_LCD_b6 = 6;
+const uint8_t PIN_LCD_b7 = 7;
+const uint8_t PIN_LCD_RS = 8;
+const uint8_t PIN_LCD_E = 9;
+const uint8_t PIN_LCD_K = 10; // D10 controls LCD backlight
+
+// ADC readings expected for the 5 buttons on the ADC input
+const uint8_t BTN_RIGHT_ADC = 0;
+const uint8_t BTN_UP_ADC = 145;
+const uint8_t BTN_DOWN_ADC = 329;
+const uint8_t BTN_LEFT_ADC = 507;
+const uint8_t BTN_SELECT_ADC = 742;
+const uint8_t BTN_NONE_ADC = 1023;
+const uint8_t BTN_ADC_GAP = 20;
+
+// LCD Dimensions
+const uint8_t LCD_COL = 16;
+const uint8_t LCD_ROW = 2;
+const uint8_t CHAR_SIZE = LCD_5x10DOTS; // from LiquidCrystal.h
+
+/*
  CLASS LCD1602KeyPad
 */
 LCD1602KeyPad::LCD1602KeyPad() : LiquidCrystal(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_b4, PIN_LCD_b5, PIN_LCD_b6, PIN_LCD_b7)
@@ -40,8 +85,8 @@ void LCD1602KeyPad::begin()
 	LiquidCrystal::setCursor( 0, 0 );
 
 	//init privated
-	_btn_state = ButtonState::RELEASED;
-	_btn_last = ButtonKey::NONE;
+	_btnState = ButtonState::RELEASED;
+	_btnLast = ButtonKey::NONE;
 }
 
 //
@@ -61,13 +106,13 @@ void LCD1602KeyPad::setBackLightFlash(unsigned long time)
 //
 void LCD1602KeyPad::setButtonsState(ButtonState state)
 {
-	_btn_state = state;
+	_btnState = state;
 }
 
 //
 ButtonState LCD1602KeyPad::getButtonsState()
 {
-	return _btn_state;
+	return _btnState;
 }
 
 // Detect the button pressed and return the value
@@ -102,17 +147,17 @@ ButtonKey LCD1602KeyPad::readButtons()
    }
 
    //handle button flags for just pressed and just released events
-   if( ( _btn_last == ButtonKey::NONE ) && ( b != ButtonKey::NONE ) )
+   if( ( _btnLast == ButtonKey::NONE ) && ( b != ButtonKey::NONE ) )
    {
-      _btn_state  = ButtonState::PRESSED;
+      _btnState  = ButtonState::PRESSED;
    }
-   if( ( _btn_last != ButtonKey::NONE ) && ( b == ButtonKey::NONE ) )
+   if( ( _btnLast != ButtonKey::NONE ) && ( b == ButtonKey::NONE ) )
    {
-      _btn_state  = ButtonState::RELEASED;
+      _btnState  = ButtonState::RELEASED;
    }
 
    //save the latest button state
-   _btn_last = b;
+   _btnLast = b;
 
    return( b );
 }
