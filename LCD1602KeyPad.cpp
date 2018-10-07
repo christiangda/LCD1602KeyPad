@@ -32,28 +32,28 @@
 */
 
 // Pins in use
-const uint8_t PIN_BUTTON_ADC = A0; // A0 is the button ADC input
-const uint8_t PIN_LCD_b4 = 4;
-const uint8_t PIN_LCD_b5 = 5;
-const uint8_t PIN_LCD_b6 = 6;
-const uint8_t PIN_LCD_b7 = 7;
-const uint8_t PIN_LCD_RS = 8;
-const uint8_t PIN_LCD_E = 9;
-const uint8_t PIN_LCD_K = 10; // D10 controls LCD backlight
+const byte PIN_BUTTON_ADC = A0; // A0 is the button ADC input
+const byte PIN_LCD_b4 = 4;
+const byte PIN_LCD_b5 = 5;
+const byte PIN_LCD_b6 = 6;
+const byte PIN_LCD_b7 = 7;
+const byte PIN_LCD_RS = 8;
+const byte PIN_LCD_E = 9;
+const byte PIN_LCD_K = 10; // D10 controls LCD backlight
 
 // ADC readings expected for the 5 buttons on the ADC input
-const uint8_t BTN_RIGHT_ADC = 0;
-const uint8_t BTN_UP_ADC = 145;
-const uint8_t BTN_DOWN_ADC = 329;
-const uint8_t BTN_LEFT_ADC = 507;
-const uint8_t BTN_SELECT_ADC = 742;
-const uint8_t BTN_NONE_ADC = 1023;
-const uint8_t BTN_ADC_GAP = 20;
+const unsigned int BTN_RIGHT_ADC = 0;
+const unsigned int BTN_UP_ADC = 145;
+const unsigned int BTN_DOWN_ADC = 329;
+const unsigned int BTN_LEFT_ADC = 507;
+const unsigned int BTN_SELECT_ADC = 742;
+const unsigned int BTN_NONE_ADC = 1023;
+const unsigned int BTN_ADC_GAP = 20;
 
 // LCD Dimensions
-const uint8_t LCD_COL = 16;
-const uint8_t LCD_ROW = 2;
-const uint8_t CHAR_SIZE = LCD_5x10DOTS; // from LiquidCrystal.h
+const byte LCD_COL = 16;
+const byte LCD_ROW = 2;
+const byte CHAR_SIZE = LCD_5x10DOTS; // from LiquidCrystal.h
 
 /*
  CLASS LCD1602KeyPad
