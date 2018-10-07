@@ -101,12 +101,6 @@ void LCD1602KeyPad::setBackLightFlash(unsigned long time)
 }
 
 //
-void LCD1602KeyPad::setButtonsState(ButtonState state)
-{
-	_btnState = state;
-}
-
-//
 ButtonState LCD1602KeyPad::getButtonsState()
 {
 	return _btnState;

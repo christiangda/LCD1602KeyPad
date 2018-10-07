@@ -17,7 +17,7 @@
 #include "LiquidCrystal.h"
 
 enum class ButtonKey { NONE, RIGHT, LEFT, UP, DOWN, SELECT };
-enum class ButtonState { IDLE, PRESSED, HOLD, RELEASED };
+enum class ButtonState { PRESSED, RELEASED };
 
 //
 class LCD1602KeyPad: public LiquidCrystal
@@ -28,7 +28,6 @@ class LCD1602KeyPad: public LiquidCrystal
 		void begin();
 		void setBackLight(bool);
 		void setBackLightFlash(unsigned long);
-		void setButtonsState(ButtonState);
 		ButtonState getButtonsState();
 		ButtonKey readButtons();
 
