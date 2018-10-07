@@ -45,10 +45,10 @@ const byte PIN_LCD_K = 10; // D10 controls LCD backlight
 const unsigned int BTN_RIGHT_ADC = 0;
 const unsigned int BTN_UP_ADC = 145;
 const unsigned int BTN_DOWN_ADC = 329;
-const unsigned int BTN_LEFT_ADC = 507;
+const unsigned int BTN_LEFT_ADC = 505;
 const unsigned int BTN_SELECT_ADC = 742;
 const unsigned int BTN_NONE_ADC = 1023;
-const unsigned int BTN_ADC_GAP = 20;
+const unsigned int BTN_ADC_THRESHOLD = 20;
 
 // LCD Dimensions
 const byte LCD_COL = 16;
@@ -80,9 +80,6 @@ void LCD1602KeyPad::begin()
 {
 	//set up the LCD number of columns, rows  and character size
 	LiquidCrystal::begin( LCD_COL, LCD_ROW, CHAR_SIZE);
-
-	//Initialice the cursor
-	LiquidCrystal::setCursor( 0, 0 );
 
 	//init privated
 	_btnState = ButtonState::RELEASED;
@@ -118,46 +115,43 @@ ButtonState LCD1602KeyPad::getButtonsState()
 // Detect the button pressed and return the value
 ButtonKey LCD1602KeyPad::readButtons()
 {
-   unsigned int v; //0-1023 values
-   ButtonKey b = ButtonKey::NONE;   // default return
-
-   //read the button ADC pin voltage
-   v = analogRead( PIN_BUTTON_ADC );
+   ButtonKey btnPressed = ButtonKey::NONE;   // default return
+   unsigned int adc = analogRead( PIN_BUTTON_ADC ); //read the button ADC pin voltage
 
    //sense if the voltage falls within valid voltage windows
-   if( v < ( BTN_RIGHT_ADC + BTN_ADC_GAP ) )
+   if( adc < ( BTN_RIGHT_ADC + BTN_ADC_THRESHOLD ) )
    {
-      b = ButtonKey::RIGHT;
+      btnPressed = ButtonKey::RIGHT;
    }
-   else if( v <= ( BTN_UP_ADC + BTN_ADC_GAP ) )
+   else if( adc <= ( BTN_UP_ADC + BTN_ADC_THRESHOLD ) )
    {
-      b = ButtonKey::UP;
+      btnPressed = ButtonKey::UP;
    }
-   else if( v <= ( BTN_DOWN_ADC + BTN_ADC_GAP ) )
+   else if( adc <= ( BTN_DOWN_ADC + BTN_ADC_THRESHOLD ) )
    {
-      b = ButtonKey::DOWN;
+      btnPressed = ButtonKey::DOWN;
    }
-   else if( v <= ( BTN_LEFT_ADC + BTN_ADC_GAP ) )
+   else if( adc <= ( BTN_LEFT_ADC + BTN_ADC_THRESHOLD ) )
    {
-      b = ButtonKey::LEFT;
+      btnPressed = ButtonKey::LEFT;
    }
-   else if( v <= ( BTN_SELECT_ADC + BTN_ADC_GAP ) )
+   else if( adc <= ( BTN_SELECT_ADC + BTN_ADC_THRESHOLD ) )
    {
-      b = ButtonKey::SELECT;
+      btnPressed = ButtonKey::SELECT;
    }
 
    //handle button flags for just pressed and just released events
-   if( ( _btnLast == ButtonKey::NONE ) && ( b != ButtonKey::NONE ) )
+   if( ( _btnLast == ButtonKey::NONE ) && ( btnPressed != ButtonKey::NONE ) )
    {
       _btnState  = ButtonState::PRESSED;
    }
-   if( ( _btnLast != ButtonKey::NONE ) && ( b == ButtonKey::NONE ) )
+   if( ( _btnLast != ButtonKey::NONE ) && ( btnPressed == ButtonKey::NONE ) )
    {
       _btnState  = ButtonState::RELEASED;
    }
 
    //save the latest button state
-   _btnLast = b;
+   _btnLast = btnPressed;
 
-   return( b );
+   return( btnPressed );
 }
