@@ -5,8 +5,8 @@
 ##################################################
 
 LCD1602KeyPad	KEYWORD1
-ButtonKey KEYWORD1
-ButtonState KEYWORD1
+ButtonKey	KEYWORD1
+ButtonState	KEYWORD1
 
 ##################################################
 # Datatypes (KEYWORD2)
